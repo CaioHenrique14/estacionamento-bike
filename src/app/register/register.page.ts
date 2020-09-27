@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { LoadingController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -6,10 +10,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  
+  formRegister: FormGroup;
 
-  constructor() { }
+  constructor(
+    private statusBar: StatusBar,
+    private fb: FormBuilder,
+    private router: Router,
+    public loadingController: LoadingController,
+    public toastController: ToastController
+  ) { }
 
   ngOnInit() {
+    this.createForm();
+  }
+
+  createForm() {
+    this.formRegister = this.fb.group({
+      name: [''],
+      mail: [''],
+      password: [''],
+      confirm_password : [''],
+      toggle: [false]
+    });
   }
 
 }
