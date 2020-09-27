@@ -9,7 +9,7 @@
   <div class="content">
     <img alt="Logo" src="assets/img/logo.png" />
     <form [formGroup]="formLogin">
-
+      <p>Login</p>
       <ion-item lines="none" class="email">
         <ion-input formControlName="email" type="mail" placeholder="Email">
         </ion-input>
@@ -26,7 +26,7 @@
         <ion-label>Lembrar dados de acesso</ion-label>
       </ion-item>
       <div class="btn">
-        <ion-button [disabled]="!formLogin.valid">Entrar</ion-button>
+        <ion-button [disabled]="!formLogin.valid" (click)="login()">Entrar</ion-button>
         <p (click)="register()">Primeira vez aqui? Cadastrar-se</p>
         
       </div>
