@@ -1,0 +1,36 @@
+<ion-header class="ion-no-border" no-border>
+  <ion-toolbar color="primary" mode="ios">
+    <ion-title color="tertiary">
+      Super Tabs
+    </ion-title>
+    <preferences slot="end"></preferences>
+  </ion-toolbar>
+</ion-header>
+<super-tabs activeTabIndex="0" [config]="{ debug: true, sideMenu: 'left', allowElementScroll: true, nativeSmoothScroll: true }">
+  <super-tabs-toolbar slot="bottom">
+    <super-tab-button>
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Favourites</ion-label>
+    </super-tab-button>
+    <super-tab-button>
+      <ion-icon name="map"></ion-icon>
+      <ion-label>Contacts</ion-label>
+    </super-tab-button>
+    <super-tab-button>
+      <ion-icon name="person"></ion-icon>
+      <ion-label>Profile</ion-label>
+    </super-tab-button>
+  </super-tabs-toolbar>
+
+  <super-tabs-container autoScrollTop>
+    <super-tab>
+      <ion-nav [root]="ListPage"></ion-nav>
+    </super-tab>
+    <super-tab>
+      <ion-nav [root]="AboutPage"></ion-nav>
+    </super-tab>
+    <super-tab>
+      <ion-nav [root]="AccountPage"></ion-nav>
+    </super-tab>
+  </super-tabs-container>
+</super-tabs>
