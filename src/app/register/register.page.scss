@@ -59,7 +59,7 @@ ion-content {
 }
 
 .content ion-item.toggle ion-toggle {
-   --handle-background: #FF0F0E;
+   --handle-background: var(--ion-color-secondary);
 }
 
 .content ion-item.toggle ion-label {
@@ -72,9 +72,9 @@ ion-content {
 }
 
 .content .btn ion-button {
-   --background: #FF0F0E;
+   --background: var(--ion-color-secondary);
    --border-radius: 5px;
-   width: 100%;
+   width: 100%; 
    --color: #fafafa;
    text-transform: inherit;
    height: 45px;
