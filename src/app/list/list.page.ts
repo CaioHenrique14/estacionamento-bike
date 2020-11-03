@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { RestService } from '../services/rest.service';
 import { SpacesPage } from '../spaces/spaces.page';
+import { IonicMqttModule,MQTTService} from 'ionic-mqtt';
 
 @Component({
   selector: 'app-list',
@@ -17,18 +18,19 @@ export class ListPage implements OnInit {
     port: number,
     clientId: string,
   } = {
-    host: "127.0.0.1",
+    host: "192.168.100.18",
     port: 1887,
-    clientId: "mqtt",
+    clientId: "mqtt-explorer-657f05f9",
   };
 
   private TOPIC: string[] = [];
 
   constructor(public restService: RestService, public modalController: ModalController
-  // ,private mqttService: MQTTService
+  ,private mqttService: MQTTService,public alertController:AlertController
   ) { }
 
   ngOnInit() {
+    this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
   }
 
   ionViewWillEnter() {
@@ -78,5 +80,28 @@ export class ListPage implements OnInit {
       componentProps: {'listParking':list,'spacesParking':spaces}
     });
     return await modal.present();
+  }
+
+  private _onConnectionLost(responseObject) {
+    // connection listener
+    // ...do actions when connection lost
+    console.log('_onConnectionLost', responseObject);
+  }
+
+  private async _onMessageArrived(message) {
+    // message listener
+    // ...do actions with arriving message
+    console.log('message', message);
+    
+      const alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Atualização',
+        subHeader: 'Mensagem',
+        message: message,
+        buttons: ['OK']
+      });
+  
+      await alert.present();
+    
   }
 }
