@@ -4,19 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ListPageRoutingModule } from './list-routing.module';
+import { SpacesPageRoutingModule } from './spaces-routing.module';
 
-import { ListPage } from './list.page';
-import { HttpClientModule } from '@angular/common/http';
+import { SpacesPage } from './spaces.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ListPageRoutingModule,
-    HttpClientModule
+    SpacesPageRoutingModule
   ],
-  declarations: [ListPage]
+  declarations: [SpacesPage]
 })
-export class ListPageModule {}
+export class SpacesPageModule {}

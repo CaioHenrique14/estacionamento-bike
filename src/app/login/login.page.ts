@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { LoadingController, ToastController, AlertController } from '@ionic/angular';
+import { RestService } from '../services/rest.service';
 
 @Component({
   selector: 'app-login',
@@ -11,14 +12,14 @@ import { LoadingController, ToastController, AlertController } from '@ionic/angu
 })
 export class LoginPage implements OnInit {
   formLogin: FormGroup;
-  
+
   constructor(
     private statusBar: StatusBar,
     private fb: FormBuilder,
     private router: Router,
     public loadingController: LoadingController,
-    public toastController: ToastController
-
+    public toastController: ToastController,
+    public restService: RestService
   ) { }
 
   ngOnInit() {
@@ -33,13 +34,24 @@ export class LoginPage implements OnInit {
     });
   }
 
-  register(){
+  register() {
     console.log("Registrar");
     this.router.navigate(['/register'])
   }
 
-  login(){
-    this.router.navigate(['/initial'])
+  login() {
+
+    // let body = {
+    //   email: this.formLogin.get('email').value,
+    //   password: this.formLogin.get('senha').value
+    // }
+    // this.restService.authUser(body).then((res: any) => {
+    //   console.log(res);
+    //   this.router.navigate(['/initial']);
+    // }).catch((err: any) => {
+    //   console.error(err);
+    // });
+    this.router.navigate(['/initial']);
 
   }
 

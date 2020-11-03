@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lista de vagas</ion-title>
+    <ion-button slot="start" (click)="closeModal()">
+      <ion-icon name="chevron-back"></ion-icon>
+    </ion-button>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>{{listParking.description}}</ion-card-subtitle>
+      <ion-card-title>{{listParking.name}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <div *ngFor="let space of spacesParking">
+        <ion-label>{{space.idPlace}}</ion-label>
+        <ion-toggle *ngIf="space.available" checked disabled></ion-toggle>
+        <ion-toggle *ngIf="!space.available" disabled></ion-toggle>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

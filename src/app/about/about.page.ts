@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation/ngx';
+import { RestService } from '../services/rest.service';
 
 declare var google;
 
@@ -16,7 +17,7 @@ export class AboutPage implements OnInit {
   options: GeolocationOptions;
   currentPos: Geoposition;
 
-  constructor(private geolocation: Geolocation,) { }
+  constructor(private geolocation: Geolocation,public restService: RestService) { }
 
   ngOnInit() {
   }
@@ -44,27 +45,40 @@ export class AboutPage implements OnInit {
 
   addMap(lat, long) {
 
+    
     let latLng = new google.maps.LatLng(lat, long);
-
     let mapOptions = {
       center: latLng,
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
-
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    this.addMarker();
+    this.getParking();
+  }
+
+  getParking(){
+    this.restService.getAllPlaces().then((res:any)=>{
+      console.log(res);
+      res.forEach(element => {
+        let latLng = new google.maps.LatLng(element.latitude, element.longitude);
+      this.addMarker(latLng,element);      
+      });
+    }).catch((err:any)=>{
+      console.error(err);
+    });
+    
 
   }
-  addMarker() {
-
+  addMarker(latLng,res) {
+    console.log(latLng);
     let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
-      position: this.map.getCenter()
+      position: latLng
     });
+    console.log(this.map.getCenter());
 
-    let content = "<p>This is your current position !</p>";
+    let content = `<p>${res.name}!</p></n><p>${res.description}!</p>`;
     let infoWindow = new google.maps.InfoWindow({
       content: content
     });

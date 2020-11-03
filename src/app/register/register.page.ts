@@ -10,7 +10,7 @@ import { LoadingController, ToastController } from '@ionic/angular';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  
+
   formRegister: FormGroup;
 
   constructor(
@@ -30,9 +30,17 @@ export class RegisterPage implements OnInit {
       name: [''],
       mail: [''],
       password: [''],
-      confirm_password : [''],
+      confirm_password: [''],
       toggle: [false]
     });
+  }
+
+  register() {
+    // "name": "João",
+    // "email": "t.joaoguilherme@gmail.com",
+    // "phone": "129996366667",
+    // "password": "joaozinho123"
+
   }
 
 }

@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'parking-details',
     loadChildren: () => import('./parking-details/parking-details.module').then( m => m.ParkingDetailsPageModule)
+  },
+  {
+    path: 'spaces',
+    loadChildren: () => import('./spaces/spaces.module').then( m => m.SpacesPageModule)
   }
 ];
 @NgModule({
