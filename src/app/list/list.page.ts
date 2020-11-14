@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { RestService } from '../services/rest.service';
 import { SpacesPage } from '../spaces/spaces.page';
-import { IonicMqttModule,MQTTService} from 'ionic-mqtt';
+
+
+
+export interface Foo {
+    bar: string;
+}
 
 @Component({
   selector: 'app-list',
@@ -12,25 +17,18 @@ import { IonicMqttModule,MQTTService} from 'ionic-mqtt';
 export class ListPage implements OnInit {
   private _listParking: any;
   spacesParking: any;
-  private _mqttClient: any;
-  private MQTT_CONFIG: {
-    host: string,
-    port: number,
-    clientId: string,
-  } = {
-    host: "192.168.100.18",
-    port: 1887,
-    clientId: "mqtt-explorer-657f05f9",
-  };
 
-  private TOPIC: string[] = [];
+  messages: Array<Foo> = [];
 
-  constructor(public restService: RestService, public modalController: ModalController
-  ,private mqttService: MQTTService,public alertController:AlertController
-  ) { }
+  status: any= [];
+
+  constructor(public restService: RestService, public modalController: ModalController,public alertController:AlertController
+  ) {
+
+   }
 
   ngOnInit() {
-    this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
+    
   }
 
   ionViewWillEnter() {
@@ -82,26 +80,5 @@ export class ListPage implements OnInit {
     return await modal.present();
   }
 
-  private _onConnectionLost(responseObject) {
-    // connection listener
-    // ...do actions when connection lost
-    console.log('_onConnectionLost', responseObject);
-  }
 
-  private async _onMessageArrived(message) {
-    // message listener
-    // ...do actions with arriving message
-    console.log('message', message);
-    
-      const alert = await this.alertController.create({
-        cssClass: 'my-custom-class',
-        header: 'Atualização',
-        subHeader: 'Mensagem',
-        message: message,
-        buttons: ['OK']
-      });
-  
-      await alert.present();
-    
-  }
 }

@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { SuperTabsModule } from '@ionic-super-tabs/angular'
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { HttpClientModule } from '@angular/common/http';
-import { IonicMqttModule,MQTTService} from 'ionic-mqtt';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,14 +21,12 @@ import { IonicMqttModule,MQTTService} from 'ionic-mqtt';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    IonicMqttModule,
-    SuperTabsModule.forRoot()
+    SuperTabsModule.forRoot(),
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Geolocation,
-    MQTTService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
